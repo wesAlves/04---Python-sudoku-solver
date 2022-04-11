@@ -1,34 +1,6 @@
-# define an sudoku table as 3x3 and 5 in the middle
-
-row1 = {'col1': 0, 'col2': 0, 'col3': 0}
-row2 = {'col1': 0, 'col2': 0, 'col3': 0}
-row3 = {'col1': 0, 'col2': 0, 'col3': 0}
-
-# row2['col2'] = 5
-
-my_sudoku_arr = {
-    "row1": row1,
-    "row2": row2,
-    "row3": row3,
-}
-
-# print(my_sudoku_arr)
-
-
-def write_numbers(*args):
-
-    seted_numbers = list(args)
-    print(seted_numbers)
-
-    for i in my_sudoku_arr:
-        for b in range(1, 10):
-            if b not in seted_numbers:
-                seted_numbers.append(b)
-
-    print(seted_numbers)
-
-
-# write_numbers(1, 2, 3)
-
-
-# fisrt group 3x3 is a list, and it has 3 positions at line1(col1, col2, col3), line2(col1, col2, col3) and line3(col1, col2, col3)
+# I need 3 list groups, one rows, second columns third 3X3
+# each number must be unique in row, columns and 3x3 groups
+# for example row1, col1, must be 1 only if there is no other 1 in row or in column
+# Each row must have all numbers from 1 to 9
+# Each column must have all number from 1 to 9
+# Each 3x3 must have all numbers from 1 to 9

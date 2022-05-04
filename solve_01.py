@@ -1,3 +1,6 @@
+from multiprocessing.dummy import Array
+
+
 main_numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 
@@ -9,38 +12,43 @@ my_sudoku_arr = [
 
 solved_sudoku_arr = []
 
-for row in my_sudoku_arr:
-    n = 0
+possible_numbers = Array
 
-    for row_item in row:
-        if row_item not in main_numbers:
-            # Need to pick one from the list and then test it against all numbers in this list to chekc if it is are not repeting itself
+# Verify if the the number are listed in the main_numbers list and if is not, pick a number that is not in my_sudoku_arr list
 
-            temp_number = 0
+usedIn_in_row = []
 
-            for n in range(len(main_numbers)):
-                temp_number = main_numbers[n]
+
+def Is_in_main_numbers(my_number):
+    if my_number in main_numbers:
+        usedIn_in_row.append(my_number)
+        # print(usedIn_in_row)
+        return my_number
+    else:
+        if my_number in usedIn_in_row:
+            print("already in used try another")
+            n = 0
+            while my_number not in usedIn_in_row:
+                my_number = main_numbers[n]
+
+                if my_number not in usedIn_in_row:
+                    usedIn_in_row.append(my_number)
+                    print(my_number)
+                    print("ends here")
+
                 n = n+1
 
-            if temp_number in row:
-                print('it already in the list')
-
-                # if temp_number < 9:
-                #     temp_number = temp_number + 1
-                # else:
-                #     temp_number = 0
-
-                print(temp_number)
-            else:
-                print('it is not')
-                print(temp_number)
-
-            # row_item = main_numbers[2]
-            # print(row_item)
-            # print("is not")
         # else:
-        #     print(row_item)
-        #     print("it is")
+        #     print("Is not in the list adding now")
+        #     usedIn_in_row.append(my_number)
+        # return my_number
+        # for row in my_sudoku_arr:
+        #     for row_item in row:
 
-    #     row_item = n
+        # print('No it is not')
+
+
+for row in my_sudoku_arr:
+    for row_item in row:
+        row_item = Is_in_main_numbers(row_item)
         # print(row_item)

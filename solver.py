@@ -5,27 +5,38 @@ def sudoku_solver(sudokuOBJ):
 
     sudoku_dic = sudokuOBJ
 
-    lines = [0] * 9
+    lines = [[0 * 9]] * 9
     columns = [[0] * 9] * 9
-    group = [0] * 9
+    group = [[0] * 3] * 3
+    groups = [group] * 9
 
     # go by line
-    for line in sudoku_dic:
-        for i in range(len(line)):
-            if line[i] == 0:
-                for p in range(1, 10):
-                    if p not in line:
-                        # call function here to solve the line
-                        print(p)
+    # for line in sudoku_dic:
+    #     for i in range(len(line)):
+    #         if line[i] == 0:
+    #             for p in range(1, 10):
+    #                 if p not in line:
+    #                     # call function here to solve the line
+    #                     print(p)
 
-    # go by column
-    for column in columns:
-        for i in range(len(columns)):
-            if column[i] == 0:
-                for p in range(1, 10):
-                    if p not in column:
-                        # call function here to solve the column
-                        print(p)
+    # # go by column
+    # for column in columns:
+    #     for i in range(len(columns)):
+    #         if column[i] == 0:
+    #             for p in range(1, 10):
+    #                 if p not in column:
+    #                     # call function here to solve the column
+    #                     print(p)
+
+    # # go by group
+    # for line in group:
+    #     for i in range(len(group)):
+    #         if line[i] == 0:
+    #             for p in range(1, 10):
+    #                 if p not in line:
+    #                     print(p)
+
+    print(groups)
 
 
 sudoku_solver([

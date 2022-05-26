@@ -4,11 +4,27 @@ from pyparsing import col
 def sudoku_solver(sudokuOBJ):
 
     sudoku_dic = sudokuOBJ
+    sudoku_size = 9
 
-    lines = [[0 * 9]] * 9
-    columns = [[0] * 9] * 9
+    lines = []
+    columns = []
     group = [[0] * 3] * 3
     groups = [group] * 9
+
+    # populate line
+    for line in sudoku_dic:
+        lines.append(line)
+
+    # populate columns
+    for i in range(sudoku_size):
+
+        columns.append([])
+
+        for line in lines:
+            columns[i].append(line[i])
+
+    print(columns)
+    print(lines)
 
     # go by line
     # for line in sudoku_dic:
@@ -36,11 +52,9 @@ def sudoku_solver(sudokuOBJ):
     #                 if p not in line:
     #                     print(p)
 
-    print(groups)
-
 
 sudoku_solver([
-    # [8, 7, 4, 6, 9, 5, 0, 2, 0],
+    [8, 7, 4, 6, 9, 5, 0, 2, 0],
     #    [0, 3, 0, 0, 7, 4, 0, 0, 6],
     #    [6, 9, 5, 3, 1, 2, 0, 0, 7],
     #    [5, 2, 6, 0, 4, 8, 0, 3, 0],

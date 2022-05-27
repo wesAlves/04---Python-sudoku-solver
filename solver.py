@@ -32,25 +32,38 @@ def sudoku_solver(sudokuOBJ):
         # append a new group
         groups.append([])
 
-        for x in range(sudoku_size//3):
+        for y in range(sudoku_size//3):
             # append a new line in each group
-            groups[group].append([])
+            groups[group].append([0, 0, 0])
 
+            # find the right line to interact accordingli with group position
             if group < 3:
-                line = lines[x]
+                line = lines[y]
             if 6 > group >= 3:
-                line = lines[x+3]
+                line = lines[y+3]
             if group >= 6:
-                line = lines[x+6]
+                line = lines[y+6]
 
-            # append 3 elements to a line
-            # groups[group][x].append(x*3)
-            # groups[group][x].append(x*3+1)
-            # groups[group][x].append(x*3+2)
+            # find the right group to interact accrodingli with group position
+            for x in range(sudoku_size):
+                column_element = line[x]
 
-    # print(columns)
-    # print(lines)
-    # print(groups[0])
+                # Append empty array
+                if x < 3:
+                    groups[group][y][x] = column_element
+                else:
+                    groups[group][y][x] = 3
+
+                    # groups[group][y].append(column_element)
+
+                    # append 3 elements to a line
+                    # groups[group][y].append(y*3)
+                    # groups[group][y].append(y*3+1)
+                    # groups[group][y].append(y*3+2)
+
+                    # print(columns)
+                    # print(lines)
+    print(groups[8])
 
     # go by line
     # for line in sudoku_dic:

@@ -14,29 +14,29 @@ def sudoku_solver(sudokuOBJ):
     x = 0
     y = 0
 
-    # populate line
+    # Populate line
     for line in sudoku_dic:
         lines.append(line)
 
-    # populate columns
+    # Populate columns
     for i in range(sudoku_size):
         columns.append([])
 
         for line in lines:
             columns[i].append(line[i])
 
-    # populate group
+    # Populate group
             # groups[group][x] = lines[x][0], lines[x][1], lines[x][2]
 
     for group in range(sudoku_size):
-        # append a new group
+        # Append a new group
         groups.append([])
 
         for y in range(sudoku_size//3):
-            # append a new line in each group
+            # Fappend a new line in each group
             groups[group].append([0, 0, 0])
 
-            # find the right line to interact accordingli with group position
+            # Find the right line to interact accordingli with group position
             if group < 3:
                 line = lines[y]
             if 6 > group >= 3:
@@ -44,26 +44,33 @@ def sudoku_solver(sudokuOBJ):
             if group >= 6:
                 line = lines[y+6]
 
-            # find the right group to interact accrodingli with group position
+            # Ffind the right group to interact accrodingli with group position
             for x in range(sudoku_size):
+
+                # Line length is 9 so X needs to go until there
                 column_element = line[x]
 
                 # Append empty array
-                if x < 3:
-                    groups[group][y][x] = column_element
-                else:
-                    groups[group][y][x] = 3
 
-                    # groups[group][y].append(column_element)
+                if group < 3:
+                    print(groups[group])
 
-                    # append 3 elements to a line
-                    # groups[group][y].append(y*3)
-                    # groups[group][y].append(y*3+1)
-                    # groups[group][y].append(y*3+2)
+                # Append 3 elements to a line
+                # groups[group][y].append(y*3)
+                # groups[group][y].append(y*3+1)
+                # groups[group][y].append(y*3+2)
 
-                    # print(columns)
-                    # print(lines)
-    print(groups[8])
+                # print(columns)
+                # print(lines)
+    # print(groups[0])
+    # print(groups[1])
+    # print(groups[2])
+    # print(groups[3])
+    # print(groups[4])
+    # print(groups[5])
+    # print(groups[6])
+    # print(groups[7])
+    # print(groups[8])
 
     # go by line
     # for line in sudoku_dic:

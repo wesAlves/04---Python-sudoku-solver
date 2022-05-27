@@ -28,21 +28,29 @@ def sudoku_solver(sudokuOBJ):
     # populate group
 
     for group in groups:
-        print(x)
+        # print(x)
+        for i in range(sudoku_size//3):
+            # print(i)
+            if x < 3:
+                print(lines[0], lines[1], lines[2])
+            if 6 > x >= 3:
+                print(lines[3], lines[4], lines[5])
+            if 9 > x >= 6:
+                print(lines[6], lines[7], lines[8])
         # print(lines[x])
 
-        for line in group:
-            # print(line)
-            line[0] = (x, y)
-            line[1] = (x+1, y+1)
-            line[2] = (x+2, y+2)
+        # for line in group:
+        #     # print(line)
+        #     line[0] = (x, y)
+        #     line[1] = (x+1, y+1)
+        #     line[2] = (x+2, y+2)
 
-            print('group line')
+        #     print('group line')
 
-            y += 1
-            # for i in range(len(line)):
-            #     # print(i)
-            #     print(line)
+        #     y += 1
+        # for i in range(len(line)):
+        #     # print(i)
+        #     print(line)
         #         if y < 9:
         #             print(y)
         #             line[i] = lines[x][y]
@@ -52,7 +60,7 @@ def sudoku_solver(sudokuOBJ):
         #             line[i] = lines[x][y]
         #             y += 1
 
-        print(group)
+        # print(group)
         x += 1
 
     # print(columns)

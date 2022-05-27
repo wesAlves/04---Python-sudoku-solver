@@ -9,7 +9,7 @@ def sudoku_solver(sudokuOBJ):
     lines = []
     columns = []
     # group = []
-    groups = [[[0] * 3] * 3] * 9
+    groups = []
 
     x = 0
     y = 0
@@ -26,46 +26,31 @@ def sudoku_solver(sudokuOBJ):
             columns[i].append(line[i])
 
     # populate group
+            # groups[group][x] = lines[x][0], lines[x][1], lines[x][2]
 
-    for group in groups:
-        # print(x)
-        for i in range(sudoku_size//3):
-            # print(i)
-            if x < 3:
-                print(lines[0], lines[1], lines[2])
-            if 6 > x >= 3:
-                print(lines[3], lines[4], lines[5])
-            if 9 > x >= 6:
-                print(lines[6], lines[7], lines[8])
-        # print(lines[x])
+    for group in range(sudoku_size):
+        # append a new group
+        groups.append([])
 
-        # for line in group:
-        #     # print(line)
-        #     line[0] = (x, y)
-        #     line[1] = (x+1, y+1)
-        #     line[2] = (x+2, y+2)
+        for x in range(sudoku_size//3):
+            # append a new line in each group
+            groups[group].append([])
 
-        #     print('group line')
+            if group < 3:
+                line = lines[x]
+            if 6 > group >= 3:
+                line = lines[x+3]
+            if group >= 6:
+                line = lines[x+6]
 
-        #     y += 1
-        # for i in range(len(line)):
-        #     # print(i)
-        #     print(line)
-        #         if y < 9:
-        #             print(y)
-        #             line[i] = lines[x][y]
-        #             y += 1
-        #         else:
-        #             y = 0
-        #             line[i] = lines[x][y]
-        #             y += 1
-
-        # print(group)
-        x += 1
+            # append 3 elements to a line
+            # groups[group][x].append(x*3)
+            # groups[group][x].append(x*3+1)
+            # groups[group][x].append(x*3+2)
 
     # print(columns)
     # print(lines)
-    # print(groups)
+    # print(groups[0])
 
     # go by line
     # for line in sudoku_dic:

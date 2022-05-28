@@ -1,116 +1,81 @@
-from pyparsing import col
+def find_next_empty(sudoku):
+    # Finds the next row, col on the puzzle that's not filled yet
+    # Return row, col tuple or (None, None)
+
+    for row in range(9):
+        for col in range(9):
+            if sudoku[row][col] == -1:
+                return row, col
+
+    return None, None
 
 
-def sudoku_solver(sudokuOBJ):
+def is_valid(sudoku, guess, row, col):
+    # Figures out whether the guess at the row/col of the puzzçe is valid guess
 
-    sudoku_dic = sudokuOBJ
-    sudoku_size = 9
+    # Star with row
+    row_vals = sudoku[row]
+    if guess in row_vals:
+        # print(guess, 'value is in row')
+        return False
 
-    lines = []
-    columns = []
-    # group = []
-    groups = []
+    # Going to column
+        # col_vals = []
+        # for i in range(9):
+        #     col_vals.append(sudoku[i][col])
+    col_vals = [sudoku[i][col] for i in range(9)]
+    if guess in col_vals:
+        # print(guess, 'value is in col')
+        return False
 
-    x = 0
-    y = 0
+    # And then the square
+    row_start = (row//3) * 3
+    col_start = (row//3) * 3
 
-    # Populate line
-    for line in sudoku_dic:
-        lines.append(line)
+    for r in range(row_start, row_start + 3):
+        for c in range(col_start, col_start + 3):
+            if sudoku[r][c] == guess:
+                # print(guess, 'value is in 3x3')
+                return False
 
-    # Populate columns
-    for i in range(sudoku_size):
-        columns.append([])
-
-        for line in lines:
-            columns[i].append(line[i])
-
-    # Populate group
-            # groups[group][x] = lines[x][0], lines[x][1], lines[x][2]
-
-    for group in range(sudoku_size):
-        # Append a new group
-        groups.append([])
-
-        for y in range(sudoku_size//3):
-            # Fappend a new line in each group
-            groups[group].append([0, 0, 0])
-
-            # Find the right line to interact accordingli with group position
-            if group < 3:
-                line = lines[y]
-            if 6 > group >= 3:
-                line = lines[y+3]
-            if group >= 6:
-                line = lines[y+6]
-                # print(line)
-
-            # for item in line:
-            #     print(item)
-
-            # Ffind the right group to interact accrodingli with group position
-            # for x in range(sudoku_size//3):
-
-                # Line length is 9 so X needs to go until there
-                # column_element = line[x]
-                # print(column_element)
-
-                # if x < 3:
-                #     # Append empty array
-                #     groups[group][y][x] = column_element
-
-                # Append 3 elements to a line
-                # groups[group][y].append(y*3)
-                # groups[group][y].append(y*3+1)
-                # groups[group][y].append(y*3+2)
-
-                # print(columns)
-                # print(lines)
-    # print(groups[0])
-    # print(groups[1])
-    # print(groups[2])
-    # print(groups[3])
-    # print(groups[4])
-    # print(groups[5])
-    # print(groups[6])
-    # print(groups[7])
-    # print(groups[8])
-
-    # go by line
-    # for line in sudoku_dic:
-    #     for i in range(len(line)):
-    #         if line[i] == 0:
-    #             for p in range(1, 10):
-    #                 if p not in line:
-    #                     # call function here to solve the line
-    #                     print(p)
-
-    # # go by column
-    # for column in columns:
-    #     for i in range(len(columns)):
-    #         if column[i] == 0:
-    #             for p in range(1, 10):
-    #                 if p not in column:
-    #                     # call function here to solve the column
-    #                     print(p)
-
-    # # go by group
-    # for line in group:
-    #     for i in range(len(group)):
-    #         if line[i] == 0:
-    #             for p in range(1, 10):
-    #                 if p not in line:
-    #                     print(p)
+    return True
 
 
-sudoku_solver([
-    [8, 7, 4, 6, 9, 5, 0, 2, 0],
-    [0, 3, 0, 0, 7, 4, 0, 0, 6],
-    [6, 9, 5, 3, 1, 2, 0, 0, 7],
-    [5, 2, 6, 0, 4, 8, 0, 3, 0],
-    [0, 0, 0, 5, 0, 7, 8, 6, 4],
-    [0, 0, 0, 9, 0, 0, 0, 0, 0],
-    [1, 0, 8, 0, 3, 6, 0, 0, 2],
-    [0, 0, 2, 0, 5, 9, 1, 7, 8],
-    [7, 5, 9, 2, 8, 1, 0, 4, 3]
-])
+def sudoku_solver(sudoku):
+
+    row, col = find_next_empty(sudoku)
+
+    if row is None and col is None:  # Here we have solved the puzzle
+        return True
+
+    # If we have spots to fill
+    for guess in range(1, 10):
+        if is_valid(sudoku, guess, row, col):
+            # If the guess is true put in the puzzle
+            sudoku[row][col] = guess
+
+            # Recuse unsing sudoku
+            if sudoku_solver(sudoku):
+                return True
+
+        sudoku[row][col] = -1
+        # sudoku_solver(sudoku)
+
+    return False
+
+
+if __name__ == '__main__':
+    example = [
+        [-1, 6, -1, -1, -1, -1, -1, -1, 4],
+        [-1, 5, -1, -1, 7, 1, -1, 8, -1],
+        [-1, 1, -1, -1, 9, -1, -1, -1, 3],
+        [2, -1, -1, -1, 8, -1, -1, -1, 7],
+        [-1, -1, -1, 6, -1, 4, -1, -1, -1],
+        [9, -1, -1, 7, -1, -1, -1, 4, -1],
+        [-1, 9, -1, -1, 7, -1, 5, -1, -1],
+        [3, -1, 2, -1, 1, -1, -1, -1, 8],
+        [-1, -1, -1, -1, -1, -1, -1, -1, -1]
+    ]
+
+    print(sudoku_solver(example))
+    print(example)
